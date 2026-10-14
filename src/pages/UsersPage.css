@@ -1,0 +1,17 @@
+/* Users Page CSS */
+.user-col {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.user-avatar {
+  width: 32px; height: 32px;
+  background: var(--color-neutral);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+.user-info { display: flex; flex-direction: column; }
+.user-email { font-size: 12px; color: var(--color-tertiary); }

@@ -1,0 +1,359 @@
+/* Entry Detail Page */
+
+/* Breathing room around the page, so the back link and batch name are not
+   flush against the top of the viewport, and the header, cards and tables are
+   inset from the sides rather than running to the very edge of the content
+   column. Matches --space-6, the gap used between the sections below, so the
+   page reads as one rhythm, and uses the dashboard's clamp() so the inset
+   grows with the viewport instead of jumping at breakpoints. */
+.detail-page {
+  padding: var(--space-6) clamp(14px, 2vw, 28px);
+}
+
+/* Vertical rhythm between the stacked sections. Without this the first card
+   sits flush against the header above it and reads as one block. */
+.detail-page > * + * {
+  margin-top: var(--space-6);
+}
+
+.top-info-grid {
+  margin-top: var(--space-6);
+}
+
+/*
+ * Card titles on this page.
+ *
+ * The class was already in use here for "Batch Breakdown" but only defined in
+ * CompaniesPage.css, which this page does not import, so it rendered as a
+ * default h3 at 1.5rem in body weight. Defined properly it is also what the
+ * Batch Information card now uses, so the two cards match.
+ */
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-4);
+}
+
+.detail-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.batch-title-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.batch-no {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 5vw, 32px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.company-subtitle {
+  color: var(--color-tertiary);
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+.header-actions {
+  display: flex;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.info-card-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  /* CardContent ships `p-6 pt-0`, which leaves this grid flush against the
+     card's top border. Restore it so the first label is inset like the rest. */
+  padding-top: 24px;
+}
+
+.info-item label {
+  display: block;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-tertiary);
+  margin-bottom: 4px;
+}
+
+.info-item span {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/*
+ * The card title is a grid item like any other, so without this it would take
+ * a column of its own and push the fields out of alignment. Its placeholder
+ * needs the same treatment, hence the second selector.
+ */
+.info-card-content > .section-title,
+.info-card-content > .sk-section {
+  grid-column: 1 / -1;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--space-6);
+  margin-bottom: 32px;
+}
+
+.stat-big {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-label {
+  font-size: 12px;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.stat-val {
+  font-size: clamp(24px, 4vw, 32px);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.stat-val small {
+  font-size: 15px;
+  color: var(--color-tertiary);
+  font-weight: 500;
+}
+
+.stat-sub {
+  font-size: 12.5px;
+  color: var(--color-tertiary);
+  margin-top: 4px;
+}
+
+.clean-stat .stat-val {
+  color: var(--color-clean);
+}
+
+.processed-stat .stat-val {
+  color: var(--color-accent);
+}
+
+.progress-container {
+  margin-top: 24px;
+  /* The legend is the last thing in the Batch Breakdown card; without this it
+     sat close enough to the card edge to read as clipped. */
+  padding-bottom: 10px;
+}
+
+.progress-bar {
+  display: flex;
+  height: 24px;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  background: var(--color-neutral);
+}
+
+.segment { height: 100%; }
+.segment--clean { background: var(--color-clean); }
+.segment--incleaning { background: var(--color-in-cleaning); }
+.segment--unprocessed { background: var(--color-unprocessed); }
+.segment--reject { background: var(--color-error); }
+.segment--waste { background: var(--color-waste); }
+
+.progress-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: var(--space-4);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  color: var(--color-tertiary);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.dot--clean { background: var(--color-clean); }
+.dot--incleaning { background: var(--color-in-cleaning); }
+.dot--unprocessed { background: var(--color-unprocessed); }
+.dot--reject { background: var(--color-error); }
+.dot--waste { background: var(--color-waste); }
+
+.tables-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 100%;
+}
+
+.table-card-header {
+  padding: var(--space-4) 20px;
+  border-bottom: 1px solid var(--color-neutral);
+}
+
+/* The stock breakdown is the widest table on the page and reads badly in a
+   narrow column, so it is given the full width of the grid. */
+.table-card--full {
+  width: 100%;
+}
+
+/* Figures on the total row should not be mistaken for another fraction's. */
+.row-total > td {
+  font-weight: 700;
+  border-top: 2px solid var(--color-neutral);
+  background: var(--color-neutral-subtle, rgba(127, 127, 127, 0.07));
+}
+
+.table-card-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .detail-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .header-actions {
+    width: 100%;
+  }
+
+  .header-actions button,
+  .header-actions a {
+    flex: 1 1 auto;
+    min-height: 44px;
+    justify-content: center;
+  }
+
+  .stats-row {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+
+  .info-card-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  /*
+   * Two across instead of one per row.
+   *
+   * A single column pushed a six-field card most of a phone screen down and
+   * made the batch details a scrolling exercise. Every field is short enough -
+   * a date, a grade, a supplier name - that two sit side by side without
+   * truncating, so the type steps down instead of the layout stepping sideways.
+   */
+  .info-card-content {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 10px;
+  }
+
+  .info-item label {
+    font-size: 10px;
+    letter-spacing: 0.3px;
+    margin-bottom: 2px;
+  }
+
+  .info-item span {
+    font-size: 12px;
+    /* Supplier and origin names are the one field long enough to need this. */
+    overflow-wrap: anywhere;
+  }
+}
+
+/* ── Loading placeholder ──────────────────────────────────────────────
+   Widths approximate the real elements so the page does not reflow when
+   the batch arrives. Heights come from the type scale the page uses. */
+.sk-back { width: 38px; height: 38px; border-radius: 8px; }
+.sk-title { width: 180px; height: 28px; }
+.sk-subtitle { width: 130px; height: 15px; margin-top: 8px; }
+.sk-button { width: 130px; height: 38px; border-radius: 8px; }
+.sk-button--icon { width: 38px; }
+.sk-label { width: 64px; height: 11px; }
+.sk-value { width: 100%; max-width: 150px; height: 18px; margin-top: 8px; }
+.sk-section { width: 160px; height: 18px; margin-bottom: 16px; }
+.sk-stat-value { width: 96px; height: 26px; margin-top: 8px; }
+.sk-sub { width: 72px; height: 12px; margin-top: 8px; }
+.sk-progress { width: 100%; height: 14px; border-radius: 999px; }
+.sk-row { width: 100%; height: 38px; margin-bottom: 8px; border-radius: 6px; }
+
+@media (max-width: 640px) {
+  .detail-page > * + *,
+  .top-info-grid {
+    margin-top: var(--space-4);
+  }
+
+  .sk-button { width: 100px; }
+
+  /*
+   * The four summary boxes, two across.
+   *
+   * `minmax(180px, 1fr)` never resolves to two columns on a phone - 180 twice
+   * plus the gap is wider than the screen - so auto-fit quietly dropped to one
+   * per row. Stating two columns outright and stepping the figures down keeps
+   * the whole summary visible without scrolling.
+   */
+  .stats-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+  }
+
+  .stat-label {
+    font-size: 10.5px;
+    letter-spacing: 0.3px;
+    margin-bottom: 4px;
+  }
+
+  .stat-val {
+    /* Below the 24px floor the clamp used on desktop: two digits plus a
+       separator and a comma already need the width. */
+    font-size: 19px;
+  }
+
+  .stat-val small {
+    font-size: 11px;
+  }
+
+  .stat-sub {
+    font-size: 10.5px;
+    margin-top: 2px;
+  }
+
+  /* The table itself is styled globally, in styles/global.css, so the
+     breakdown and the processing log below it match. */
+
+  .row-total > td {
+    font-size: 12px;
+  }
+}

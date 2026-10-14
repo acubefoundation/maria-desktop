@@ -1,0 +1,602 @@
+const fs = require('fs');
+const path = require('path');
+
+const cssContent = `/* Stock Page (Ledger) - Robi Design System */
+.stock-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-bottom: var(--space-12);
+}
+
+.stock-filters-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.stock-status-pills {
+  display: flex;
+  gap: var(--space-2);
+}
+
+.stock-pill {
+  background: var(--color-surface);
+  border: 1px solid var(--color-neutral);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-tertiary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: all var(--transition-fast);
+}
+
+.stock-pill:hover {
+  background: var(--color-bg);
+  transform: translateY(-1px) scale(1.02);
+}
+
+.stock-pill:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.stock-pill--active {
+  background: var(--color-on-surface);
+  color: var(--color-surface);
+  border-color: var(--color-on-surface);
+}
+
+.stock-pill-count {
+  background: var(--color-neutral);
+  color: var(--color-on-surface);
+  padding: 2px 6px;
+  border-radius: var(--radius-full);
+  font-size: 11px;
+}
+.stock-pill--active .stock-pill-count {
+  background: rgba(255, 255, 255, 0.2);
+  color: var(--color-surface);
+}
+
+.stock-group-view {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  background: var(--color-surface);
+  padding: var(--space-1);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-neutral);
+}
+
+.stock-group-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-tertiary);
+  margin-left: var(--space-2);
+}
+
+.stock-group-btn {
+  background: transparent;
+  border: none;
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-md);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-tertiary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.stock-group-btn:hover {
+  color: var(--color-text);
+}
+
+.stock-group-btn--active {
+  background: var(--color-bg);
+  color: var(--color-text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Priority Batch Card - Bento Style */
+.priority-batch {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-neutral);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+}
+
+.priority-batch__header {
+  background: var(--color-on-surface);
+  padding: var(--space-6);
+  color: var(--color-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.priority-batch__header::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.priority-batch__top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+  position: relative;
+  z-index: 1;
+}
+
+.priority-batch__badge {
+  background: var(--color-accent);
+  color: #fff;
+  padding: var(--space-1) var(--space-3);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-radius: var(--radius-sm);
+}
+
+.priority-batch__bin {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-surface);
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.priority-batch__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  position: relative;
+  z-index: 1;
+}
+
+.priority-batch__no {
+  color: var(--color-accent);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+}
+
+.priority-batch__company {
+  color: var(--color-surface);
+  font-size: 24px;
+  font-weight: 700;
+  width: 70%;
+  line-height: 1.2;
+}
+
+.priority-batch__grade {
+  position: absolute;
+  bottom: var(--space-6);
+  right: var(--space-6);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  color: var(--color-surface);
+  padding: var(--space-2) var(--space-4);
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: var(--radius-md);
+}
+
+.priority-batch__body {
+  padding: var(--space-6);
+}
+
+.priority-batch__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.pb-stat {
+  background: var(--color-bg);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-neutral);
+}
+
+.pb-stat__label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-2);
+}
+
+.pb-stat__val {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
+}
+
+.pb-stat__val span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-tertiary);
+}
+
+.pb-stat__sub {
+  font-size: 12px;
+  color: var(--color-tertiary);
+  font-weight: 500;
+  margin-top: var(--space-1);
+}
+
+/* Yield splits */
+.pb-yield {
+  margin-bottom: var(--space-6);
+}
+
+.pb-yield__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: var(--space-3);
+}
+
+.pb-yield__header svg {
+  color: var(--color-accent);
+  margin-right: var(--space-2);
+  vertical-align: text-bottom;
+}
+
+.pb-yield__bar {
+  display: flex;
+  height: 12px;
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  margin-bottom: var(--space-4);
+}
+
+.pb-yield__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+}
+
+.pb-yield-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--color-bg);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-neutral);
+  font-size: 12px;
+}
+
+.pb-yield-item--full {
+  grid-column: span 2;
+}
+
+.pb-yield-label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.pb-yield-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.pb-yield-val {
+  font-weight: 600;
+  color: var(--color-tertiary);
+}
+
+/* Outbound */
+.pb-outbound {
+  background: var(--color-status-dispatched-bg);
+  border-radius: var(--radius-lg);
+  padding: var(--space-4);
+  margin-bottom: var(--space-6);
+}
+
+.pb-outbound__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: var(--space-3);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-status-dispatched-text);
+}
+
+.pb-outbound__header svg {
+  color: var(--color-status-dispatched-text);
+  margin-right: var(--space-2);
+  vertical-align: text-bottom;
+}
+
+.pb-outbound__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-status-dispatched-text);
+}
+
+.pb-outbound__pill {
+  background: var(--color-surface);
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  box-shadow: var(--shadow-sm);
+}
+
+/* Audit */
+.pb-audit {
+  margin-bottom: var(--space-6);
+}
+
+.pb-audit__label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-3);
+}
+
+.pb-audit__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  position: relative;
+  padding-left: 16px;
+}
+
+.pb-audit__list::before {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  bottom: 6px;
+  width: 2px;
+  background: var(--color-neutral);
+}
+
+.pb-audit__item {
+  font-size: 13px;
+  color: var(--color-text);
+  position: relative;
+}
+
+.pb-audit__item::before {
+  content: '';
+  position: absolute;
+  left: -16px;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-tertiary);
+  border: 2px solid var(--color-surface);
+}
+
+.pb-audit__item--clean::before { background: var(--color-clean); }
+.pb-audit__item--accent::before { background: var(--color-accent); }
+.pb-audit__item--waste::before { background: var(--color-waste); }
+
+.pb-audit__btn {
+  width: 100%;
+  background: var(--color-on-surface);
+  color: var(--color-surface);
+  padding: var(--space-4);
+  border-radius: var(--radius-lg);
+  font-size: 14px;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-2);
+  cursor: pointer;
+  border: none;
+  transition: all var(--transition-fast);
+}
+
+.pb-audit__btn:hover {
+  background: hsl(225, 15%, 20%);
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+.pb-audit__btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Other Batches List */
+.other-batches-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: var(--space-6) 0 var(--space-4);
+}
+
+.other-batches-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.other-batches-sort {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-tertiary);
+}
+
+.batch-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.batch-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-neutral);
+  border-radius: var(--radius-xl);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  transition: all var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.batch-card:hover {
+  border-color: var(--color-accent);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover);
+}
+
+.batch-card:active {
+  transform: translateY(0);
+}
+
+.batch-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.batch-card__title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.batch-card__no {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.batch-card__bin {
+  background: var(--color-bg);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-tertiary);
+}
+
+.batch-card__badge {
+  background: var(--color-status-in-cleaning-bg);
+  color: var(--color-status-in-cleaning-text);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.batch-card__badge--blue {
+  background: var(--color-status-dispatched-bg);
+  color: var(--color-status-dispatched-text);
+}
+
+.batch-card__company {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.batch-card__co-name {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-tertiary);
+}
+
+.batch-card__bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: var(--space-1);
+}
+
+.batch-card__bags {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.batch-card__bags span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-tertiary);
+}
+
+.batch-card__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.batch-card__progress {
+  width: 80px;
+  height: 6px;
+  background: var(--color-neutral);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.batch-card__progress-fill {
+  height: 100%;
+  background: var(--color-clean);
+  border-radius: var(--radius-full);
+}
+
+.batch-card__status-text {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-clean);
+}
+
+.batch-card__status-badge {
+  background: var(--color-status-in-cleaning-bg);
+  color: var(--color-status-in-cleaning-text);
+  padding: var(--space-1) var(--space-2);
+  border-radius: var(--radius-md);
+  font-size: 11px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.batch-card__status-badge--gray {
+  background: var(--color-status-unprocessed-bg);
+  color: var(--color-status-unprocessed-text);
+}
+`;
+
+fs.writeFileSync(path.join(__dirname, 'src', 'pages', 'StockPage.css'), cssContent);
+console.log("Updated StockPage.css");

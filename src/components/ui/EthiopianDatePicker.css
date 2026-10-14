@@ -1,0 +1,657 @@
+/* ═══ Ethiopian Date Picker ═══ */
+
+.ethiopian-date-picker {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  width: 100%;
+  min-width: 0;
+}
+
+.ethiopian-date-picker__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.ethiopian-date-picker__label .req-star {
+  color: var(--color-error);
+  margin-left: 2px;
+}
+
+.ethiopian-date-picker__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+/* Visible keyboard focus ring on the trigger */
+.ethiopian-date-picker__input-wrapper:focus-visible {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-bg);
+}
+
+.ethiopian-date-picker__input-wrapper:hover:not(.disabled) {
+  border-color: var(--color-border-strong);
+}
+
+.ethiopian-date-picker.open .ethiopian-date-picker__input-wrapper {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-bg);
+}
+
+.ethiopian-date-picker.disabled .ethiopian-date-picker__input-wrapper {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: var(--color-bg);
+}
+
+.ethiopian-date-picker.has-error .ethiopian-date-picker__input-wrapper {
+  border-color: var(--color-error);
+}
+
+.ethiopian-date-picker__icon {
+  flex: 0 0 18px;
+  display: grid;
+  place-items: center;
+  color: var(--color-tertiary);
+  transition: color 0.15s ease;
+}
+
+.ethiopian-date-picker.open .ethiopian-date-picker__icon,
+.ethiopian-date-picker__input-wrapper:hover .ethiopian-date-picker__icon {
+  color: var(--color-accent);
+}
+
+.ethiopian-date-picker.has-error .ethiopian-date-picker__icon {
+  color: var(--color-error);
+}
+
+.ethiopian-date-picker__display {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ethiopian-date-picker__display .placeholder {
+  color: var(--color-tertiary);
+}
+
+.ethiopian-date-picker__clear {
+  flex: 0 0 20px;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  color: var(--color-tertiary);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  border-radius: 4px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ethiopian-date-picker__clear:hover {
+  background: var(--color-bg);
+  color: var(--color-error);
+}
+
+.ethiopian-date-picker__chevron {
+  flex: 0 0 16px;
+  display: grid;
+  place-items: center;
+  color: var(--color-tertiary);
+  transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.ethiopian-date-picker__chevron.rotated {
+  transform: rotate(180deg);
+  color: var(--color-accent);
+}
+
+/* Dropdown */
+.ethiopian-date-picker__dropdown {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md, 8px);
+  box-shadow: 0 8px 24px rgba(25, 25, 22, 0.12);
+  overflow: hidden;
+  animation: ethDatePickerFadeIn 0.15s ease-out;
+}
+
+@keyframes ethDatePickerFadeIn {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ethiopian-date-picker__dropdown-content {
+  max-height: 320px;
+  overflow-y: auto;
+}
+
+.ethiopian-date-picker__dropdown-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.ethiopian-date-picker__header-actions {
+  display: flex;
+  gap: 4px;
+}
+
+.ethiopian-date-picker__today-btn {
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-accent);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 100px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ethiopian-date-picker__today-btn:hover {
+  background: var(--color-accent-bg);
+  border-color: var(--color-accent);
+}
+
+/* Weekday header row for the day grid */
+.ethiopian-date-picker__weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding: 6px 8px 0;
+}
+
+.ethiopian-date-picker__weekdays span {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 0;
+}
+
+.ethiopian-date-picker__options {
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+}
+
+.ethiopian-date-picker__options--days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+  padding: 8px;
+}
+
+.ethiopian-date-picker__blank {
+  min-height: 36px;
+}
+
+.ethiopian-date-picker__option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: none;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  transition: background 0.1s ease, color 0.1s ease, box-shadow 0.1s ease;
+  text-align: left;
+  width: 100%;
+}
+
+/* Visible focus ring on every interactive option */
+.ethiopian-date-picker__option:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.ethiopian-date-picker__options--days .ethiopian-date-picker__option {
+  position: relative;
+  padding: 8px 4px;
+  font-size: 12px;
+  justify-content: center;
+  aspect-ratio: 1;
+  min-height: 36px;
+}
+
+.ethiopian-date-picker__option:hover:not(.selected):not(.out-of-range) {
+  background: var(--color-bg);
+}
+
+.ethiopian-date-picker__option.selected {
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+/* "Today" ring — layered OVER selection instead of replacing it */
+.ethiopian-date-picker__option.current {
+  box-shadow: inset 0 0 0 1.5px var(--color-success);
+  color: var(--color-success);
+}
+
+.ethiopian-date-picker__option.current.selected {
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  box-shadow: inset 0 0 0 1.5px var(--color-success);
+}
+
+.ethiopian-date-picker__dot {
+  position: absolute;
+  bottom: 3px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-success);
+}
+
+.ethiopian-date-picker__option.out-of-range,
+.ethiopian-date-picker__option:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  color: var(--color-tertiary);
+}
+
+.ethiopian-date-picker__option-number {
+  flex: 0 0 24px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  font-family: monospace;
+}
+
+.ethiopian-date-picker__option-name {
+  flex: 1;
+  text-align: left;
+}
+
+.ethiopian-date-picker__badge {
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 100px;
+  background: var(--color-accent);
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ethiopian-date-picker__option.current .ethiopian-date-picker__badge {
+  background: var(--color-success);
+}
+
+/* Year field */
+.ethiopian-date-picker__year-input-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.ethiopian-date-picker__year-btn {
+  width: 32px;
+  height: 32px;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.ethiopian-date-picker__year-btn:hover:not(:disabled) {
+  background: var(--color-bg);
+  border-color: var(--color-border-strong);
+}
+
+.ethiopian-date-picker__year-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.ethiopian-date-picker__year-field {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 6px);
+  padding: 6px 10px;
+  background: var(--color-surface);
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ethiopian-date-picker__year-field:focus-within {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-bg);
+}
+
+.ethiopian-date-picker__year-input {
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: monospace;
+  width: 100%;
+}
+
+.ethiopian-date-picker__year-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Time picker */
+.ethiopian-date-picker__time-picker {
+  padding: 12px;
+  overflow-y: visible;
+}
+
+.ethiopian-date-picker__time-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 12px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ethiopian-date-picker__time-inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  justify-content: center;
+}
+
+.ethiopian-date-picker__time-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ethiopian-date-picker__time-field label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.ethiopian-date-picker__time-numeric-input {
+  padding: 8px 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 14px;
+  font-weight: 600;
+  font-family: monospace;
+  min-width: 70px;
+  text-align: center;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.ethiopian-date-picker__time-numeric-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-bg);
+}
+
+.ethiopian-date-picker__time-separator {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  margin-bottom: 4px;
+}
+
+.ethiopian-date-picker__time-presets {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.ethiopian-date-picker__time-presets button {
+  padding: 8px 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm, 6px);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: monospace;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.ethiopian-date-picker__time-presets button:hover {
+  background: var(--color-accent-bg);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.ethiopian-date-picker__time-presets button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.ethiopian-date-picker__time-done {
+  margin-top: 16px;
+  padding: 10px 16px;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm, 6px);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+  width: 100%;
+}
+
+.ethiopian-date-picker__time-done:hover {
+  background: var(--color-accent-hover);
+}
+
+/* Footer */
+.ethiopian-date-picker__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 12px;
+  border-top: 1px solid var(--color-border);
+  background: var(--color-bg);
+}
+
+.ethiopian-date-picker__footer-date {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-text);
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.ethiopian-date-picker__done {
+  flex-shrink: 0;
+  padding: 7px 16px;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm, 6px);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.ethiopian-date-picker__done:hover {
+  background: var(--color-accent-hover);
+}
+
+/* Breadcrumb */
+.ethiopian-date-picker__navigation {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border);
+  background: var(--color-bg);
+  font-size: 12px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.ethiopian-date-picker__navigation button {
+  border: none;
+  background: transparent;
+  color: var(--color-tertiary);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm, 6px);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ethiopian-date-picker__navigation button:hover:not(:disabled) {
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+}
+
+.ethiopian-date-picker__navigation button.active {
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+}
+
+.ethiopian-date-picker__navigation button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.ethiopian-date-picker__navigation > span {
+  color: var(--color-border-strong);
+  font-weight: 600;
+}
+
+.time-divider {
+  color: var(--color-border-strong);
+}
+
+/* Error */
+.ethiopian-date-picker__error {
+  font-size: 11px;
+  color: var(--color-error);
+  margin-top: 2px;
+}
+
+/* ═══ Mobile: ≥44px touch targets ═══ */
+@media (max-width: 480px) {
+  .ethiopian-date-picker__dropdown {
+    left: -10px;
+    right: -10px;
+  }
+
+  .ethiopian-date-picker__options--days {
+    gap: 2px;
+  }
+
+  .ethiopian-date-picker__options--days .ethiopian-date-picker__option {
+    min-height: 44px;
+    font-size: 13px;
+  }
+
+  .ethiopian-date-picker__option {
+    padding: 12px;
+    min-height: 44px;
+  }
+
+  .ethiopian-date-picker__blank {
+    min-height: 44px;
+  }
+
+  .ethiopian-date-picker__year-btn,
+  .ethiopian-date-picker__clear,
+  .ethiopian-date-picker__navigation button,
+  .ethiopian-date-picker__today-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .ethiopian-date-picker__today-btn {
+    min-width: 0;
+    padding: 10px 14px;
+  }
+
+  .ethiopian-date-picker__time-presets button {
+    min-height: 44px;
+  }
+
+  .ethiopian-date-picker__time-done,
+  .ethiopian-date-picker__done {
+    min-height: 44px;
+  }
+}

@@ -1,0 +1,398 @@
+/* Global Mocca Layout System for List & Standard Pages */
+
+.mocca-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: 100%;
+}
+
+.mocca-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.mocca-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mocca-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.mocca-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 4vw, 32px);
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1.15;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.mocca-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mocca-header-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: var(--color-text);
+  color: var(--color-bg);
+  padding: 0 16px;
+  height: 40px;
+  min-height: 40px;
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: 13.5px;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.mocca-header-btn:hover {
+  background: var(--color-accent);
+  color: #ffffff;
+}
+
+.mocca-header-btn--outline {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+}
+
+.mocca-header-btn--outline:hover {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: #ffffff;
+}
+
+/* Toolbar */
+.mocca-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  background: var(--color-surface);
+  padding: var(--space-4);
+  border: 1px solid var(--color-neutral);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.mocca-search {
+  position: relative;
+  flex: 1;
+  max-width: 400px;
+}
+
+.mocca-search__icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-tertiary);
+  pointer-events: none;
+}
+
+.mocca-search__input {
+  width: 100%;
+  height: 40px;
+  padding: 0 16px 0 40px;
+  border: 1px solid var(--color-neutral);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  background: var(--color-bg);
+  color: var(--color-text);
+  transition: all var(--transition-fast);
+  box-sizing: border-box;
+}
+
+.mocca-search__input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.14);
+  }
+
+.toolbar__filters {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.toolbar--compact {
+  flex-wrap: wrap;
+}
+
+.toolbar__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* Responsive Table Container */
+.mocca-table-wrap {
+  background: var(--color-surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-neutral);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+/* Mobile Media Queries */
+@media (max-width: 768px) {
+  .mocca-header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
+  }
+
+  .mocca-header > div:last-child,
+  .mocca-header-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .mocca-header-btn {
+    flex: 1 1 auto;
+    min-width: 120px;
+    height: 42px;
+    min-height: 42px;
+    font-size: 13px;
+    justify-content: center;
+  }
+
+  .mocca-toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .toolbar--compact .mocca-toolbar,
+  .mocca-toolbar.toolbar--compact {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .mocca-search {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .mocca-search__input {
+    height: 42px;
+    font-size: 14px;
+  }
+
+  .toolbar__filters {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 8px;
+  }
+
+  .toolbar__filters > * {
+    width: 100%;
+  }
+
+  .mocca-page {
+    gap: var(--space-4);
+  }
+
+  .mocca-header-btn {
+    width: 100%;
+    flex: 1 1 100%;
+  }
+
+  .toolbar__filters {
+    grid-template-columns: 1fr;
+  }
+
+  .toolbar__actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .toolbar__actions > * {
+    width: 100%;
+  }
+}
+
+/* Shared Multi-Column Form Usability System */
+.slide-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-section-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.form-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: 2px;
+}
+
+.form-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+.form-row--3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid var(--color-border);
+  margin-top: 8px;
+}
+
+.form-error {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    background: var(--color-error-bg);
+    color: var(--color-error);
+    border: 1px solid hsla(0, 75%, 52%, 0.25);
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+@media (max-width: 640px) {
+  .form-row,
+  .form-row--3 {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  /*
+   * Export pairs (Excel + PDF) must stay on ONE row. The desktop 120px
+   * min-width floor made the pair overflow narrow phones and wrap onto two
+   * lines, so let each button take half the row. A third action drops to its
+   * own full-width row rather than squeezing all three into one cramped line.
+   */
+  .mocca-header-actions,
+  .toolbar__actions,
+  .proc-header-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .mocca-header-actions > *,
+  .toolbar__actions > *,
+  .proc-header-actions > * {
+    /*
+     * Two-up. At ~50% of a phone the label fits on a single line at 11px,
+     * which is what the earlier equal-third split could not do: it forced
+     * "Export Excel" and "Log Processing" onto two lines inside the pill.
+     * The 8px slack keeps the pair on one line even where a page stylesheet
+     * overrides the gap to 12px; flex-grow absorbs the remainder.
+     */
+    flex: 1 1 calc(50% - 8px);
+    width: auto;
+    min-width: 0;
+    padding-left: 8px;
+    padding-right: 8px;
+    font-size: 11px;
+    line-height: 1.2;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  /* A third action takes the full row so its label still fits on one line. */
+  .mocca-header-actions > *:nth-child(3),
+  .toolbar__actions > *:nth-child(3),
+  .proc-header-actions > *:nth-child(3) {
+    flex: 1 1 100%;
+  }
+
+  /* Smaller glyphs leave the buttons more room for their label. */
+  .mocca-header-actions > * > svg,
+  .toolbar__actions > * > svg,
+  .proc-header-actions > * > svg {
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+  }
+}
+
+
+/* Visually hidden but announced by screen readers.
+   Dialog.jsx, Sheet.jsx and the batch-detail loading state all rely on this;
+   without it those labels render as visible stray text. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}

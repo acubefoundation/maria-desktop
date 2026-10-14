@@ -1,0 +1,434 @@
+
+/* ═══════════════════════════════════════
+   DARK SIDEBAR - DESKTOP
+═══════════════════════════════════════ */
+
+.sidebar-overlay {
+  display: none;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: var(--sidebar-width);
+    background: linear-gradient(175deg, #0f2433 0%, #143d5c 55%, #1a3a5f 100%);
+    display: flex;
+    flex-direction: column;
+    z-index: var(--z-sidebar);
+    overflow-y: auto;
+  }
+
+/* Brand */
+
+.sidebar__brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--color-dark-border);
+  flex-shrink: 0;
+}
+
+.sidebar__brand-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+    border-radius: var(--radius-sm);
+    color: #ffffff;
+    flex-shrink: 0;
+  }
+
+.sidebar__brand-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sidebar__brand-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-dark-text);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.sidebar__brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: #5eead4;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  .sidebar__brand-dot {
+    width: 6px;
+    height: 6px;
+    background: #5eead4;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+/* Navigation */
+
+.sidebar__nav {
+  flex: 1;
+  padding: 12px 0;
+  overflow-y: auto;
+}
+
+.sidebar__list {
+  padding: 0 8px;
+}
+
+.sidebar__list li {
+  margin-bottom: 1px;
+}
+
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-dark-muted);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  border-left: 3px solid transparent;
+}
+
+.sidebar__link:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-dark-text);
+}
+
+.sidebar__link--active {
+    background: rgba(34, 211, 238, 0.14);
+    color: #67e8f9;
+    font-weight: 600;
+    border-left-color: #22d3ee;
+  }
+
+.sidebar__icon {
+  flex-shrink: 0;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.sidebar__link-text {
+  display: inline;
+}
+
+.sidebar__link--active .sidebar__icon {
+    color: #22d3ee;
+    opacity: 1;
+  }
+
+.sidebar__link:hover .sidebar__icon {
+  opacity: 1;
+}
+
+.sidebar__divider {
+  height: 1px;
+  background: var(--color-dark-border);
+  margin: 10px 12px;
+}
+
+.sidebar__section-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--color-dark-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 4px 20px 8px;
+}
+
+/* Footer */
+
+.sidebar__footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 14px 16px;
+  border-top: 1px solid var(--color-dark-border);
+  flex-shrink: 0;
+}
+
+.sidebar__user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.sidebar__user-avatar {
+  width: 34px;
+  height: 34px;
+  background: var(--color-accent);
+  color: var(--color-surface);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.sidebar__user-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.sidebar__user-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-dark-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar__user-role {
+  font-size: 11px;
+  color: var(--color-dark-muted);
+  text-transform: capitalize;
+}
+
+.sidebar__logout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-xs);
+  color: var(--color-dark-muted);
+  flex-shrink: 0;
+  transition: all var(--transition-fast);
+}
+
+.sidebar__logout:hover {
+    background: rgba(34, 211, 238, 0.15);
+    color: #22d3ee;
+  }
+
+
+/* ═══════════════════════════════════════
+   MOBILE FLOATING BOTTOM NAVIGATION
+═══════════════════════════════════════ */
+
+@media (max-width: 768px) {
+
+  /* Hide overlay on mobile */
+  .sidebar-overlay {
+    display: none;
+  }
+
+  /* Floating navigation container */
+  .sidebar {
+    position: fixed;
+    top: auto;
+    left: 50%;
+    bottom: max(12px, env(safe-area-inset-bottom));
+
+    width: min(560px, calc(100% - 24px));
+    height: auto;
+    max-height: none;
+
+    padding: 0;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+
+    transform: translateX(-50%);
+    transition: none;
+    z-index: var(--z-mobile-nav);
+  }
+
+  /* Always visible on mobile */
+  .sidebar--open {
+    transform: translateX(-50%);
+  }
+
+  /* Hide desktop elements */
+  .sidebar__brand,
+  .sidebar__footer,
+  .sidebar__admin {
+    display: none;
+  }
+
+  /* Navigation wrapper */
+  .sidebar__nav {
+    flex: none;
+    width: 100%;
+    padding: 0;
+    overflow: visible;
+  }
+
+  /* White floating navigation pill */
+  .sidebar__list {
+    /* Flex, not a fixed 7-column grid. The grid pinned every item to an
+       absolute column via :nth-child, so hiding an item for a role (the
+       Companies link is hidden from COMPANY_VIEWER) shifted every later item
+       into the wrong column and left the Dashboard colliding with Stock.
+       Flex distributes whatever items are actually present, so the bar stays
+       correct for every role. */
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    min-height: 72px;
+
+    padding: 0 8px;
+    margin: 0;
+
+    background: #fff;
+    border-radius: 999px;
+    box-shadow: 0 5px 22px rgba(0, 0, 0, 0.12);
+
+    list-style: none;
+    overflow: visible;
+  }
+
+  .sidebar__list li {
+    flex: 1 1 0;
+    min-width: 0;
+    margin: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* The Dashboard keeps the elevated centre treatment. It is given a wider
+     flex basis so the extra space splits evenly either side of it, which
+     lands it dead centre when the items either side are balanced. */
+  .sidebar__list li.sidebar__item--dashboard {
+    flex: 1.45 1 0;
+  }
+
+  /* Mobile navigation links */
+  .sidebar__link {
+    width: 100%;
+    min-width: 0;
+    min-height: 62px;
+
+    padding: 7px 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+
+    color: #737783;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 1;
+    text-decoration: none;
+
+    transition:
+      color 0.2s ease,
+      background 0.2s ease;
+  }
+
+  .sidebar__link:hover {
+    background: transparent;
+    color: #22d3ee;
+  }
+
+  /* Mobile icons */
+  .sidebar__icon {
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    flex-shrink: 0;
+  }
+
+  /* Active navigation */
+  .sidebar__link--active {
+    background: transparent;
+    color: #22d3ee;
+    border: none;
+    font-weight: 600;
+  }
+
+  .sidebar__link--active .sidebar__icon {
+    color: #22d3ee;
+  }
+
+  /* Elevated center Dashboard button */
+  .sidebar__link--dashboard {
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+  }
+
+  .sidebar__link--dashboard .sidebar__icon {
+    box-sizing: content-box;
+
+    width: 20px;
+    height: 20px;
+
+    padding: 11px;
+    margin-top: -28px;
+    margin-bottom: 1px;
+
+    border-radius: 50%;
+    background: linear-gradient(135deg, #22d3ee 0%, #3b82f6 100%);
+    color: #fff;
+
+    box-shadow: 0 4px 12px rgba(34, 211, 238, 0.35);
+  }
+
+  .sidebar__link--dashboard.sidebar__link--active {
+    color: #22d3ee;
+  }
+
+  /* Dashboard when not active */
+  .sidebar__link--dashboard:not(.sidebar__link--active)
+    .sidebar__icon {
+    background: #fff;
+    color: #737783;
+    border: 1px solid #dedede;
+  }
+
+  /* Hide administration separators on mobile */
+  .sidebar__divider,
+  .sidebar__section-label {
+    display: none;
+  }
+
+  /* Icon-only navigation on mobile */
+  .sidebar__link-text {
+    display: none;
+  }
+
+  /* Touch-friendly logout if used elsewhere */
+  .sidebar__logout {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}

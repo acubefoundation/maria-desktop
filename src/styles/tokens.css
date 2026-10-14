@@ -1,0 +1,144 @@
+/* Robi's Design System - CSS Custom Properties */
+@layer base {
+  :root {
+    /* Colors - Low Saturation, No Pure Black/White */
+    --color-bg: #fafafa;
+    --color-text: #0f1115;
+    
+    /* Primary Accent - Bright Warm Teal Blue for Maria Private Stock */
+    --color-accent: hsl(190, 80%, 48%);
+    --color-primary: hsl(190, 80%, 48%);
+    --color-secondary: #ffffff;
+    --color-tertiary: #475569;
+    --color-neutral: #e2e8f0;
+    --color-surface: #ffffff;
+    --color-on-surface: #0f1115;
+    --color-error: hsl(0, 75%, 52%);
+
+    /* Dark Sidebar - Deep Blue Gradient */
+    --color-dark: #0f2433;
+    --color-dark-text: #f1f5f9;
+    --color-dark-muted: #94a3b8;
+    --color-dark-border: #1e3a52;
+
+    /* Semantic colors for coffee domain (Bright & Vibrant) */
+    --color-clean: hsl(152, 65%, 42%);
+    --color-clean-bg: hsla(152, 65%, 42%, 0.14);
+    --color-reject: hsl(0, 75%, 52%);
+    --color-reject-bg: hsla(0, 75%, 52%, 0.14);
+    --color-waste: hsl(28, 65%, 38%);
+    --color-waste-bg: hsla(28, 65%, 38%, 0.14);
+    --color-in-cleaning: hsl(175, 72%, 44%);
+    --color-in-cleaning-bg: hsla(175, 72%, 44%, 0.14);
+    --color-unprocessed: hsl(215, 65%, 52%);
+    --color-unprocessed-bg: hsla(215, 65%, 52%, 0.14);
+    --color-dispatched: hsl(205, 80%, 50%);
+    --color-dispatched-bg: hsla(205, 80%, 50%, 0.14);
+
+    /* Extra Accents & States */
+    --color-accent-bg: hsla(190, 80%, 48%, 0.14);
+    --color-accent-blue: hsl(215, 80%, 55%);
+    --color-accent-blue-bg: hsla(215, 80%, 55%, 0.14);
+    --color-error-bg: hsla(0, 75%, 52%, 0.14);
+
+    /* Status badge colors - Tinted variations */
+    --color-status-unprocessed-bg: hsl(215, 40%, 96%);
+    --color-status-unprocessed-text: hsl(215, 50%, 42%);
+    --color-status-in-cleaning-bg: hsl(175, 70%, 94%);
+    --color-status-in-cleaning-text: hsl(175, 60%, 34%);
+    --color-status-processed-bg: hsl(152, 55%, 94%);
+    --color-status-processed-text: hsl(152, 60%, 32%);
+    --color-status-dispatched-bg: hsl(205, 75%, 94%);
+    --color-status-dispatched-text: hsl(205, 70%, 35%);
+
+    /* Typography */
+    --font-display: 'CoinbaseDisplay', 'Inter', system-ui, sans-serif;
+    --font-sans: 'CoinbaseSans', 'Inter', system-ui, sans-serif;
+    --font-text: 'CoinbaseText', 'Inter', system-ui, sans-serif;
+
+    /* Font sizes */
+    --text-display: 64px;
+    --text-headline-lg: 44px;
+    --text-headline-md: 20px;
+    --text-body-lg: 18px;
+    --text-body-md: 16px;
+    --text-body-sm: 13px;
+    --text-label-lg: 18px;
+    --text-label-md: 16px;
+    --text-label-sm: 13px;
+
+    /* Line heights */
+    --lh-display: 64px;
+    --lh-headline-lg: 44px;
+    --lh-headline-md: 28px;
+    --lh-body-lg: 28px;
+    --lh-body-md: 28px;
+    --lh-body-sm: 20px;
+    --lh-label-lg: 22px;
+    --lh-label-md: 24px;
+    --lh-label-sm: 20px;
+
+    /* Spacing - strict 4px system */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-6: 24px;
+    --space-8: 32px;
+    --space-12: 48px;
+    --space-16: 64px;
+
+    /* Legacy spacing variables - mapped to 4px system for backward compatibility */
+    --space-xs: var(--space-1);
+    --space-sm: var(--space-2);
+    --space-md: var(--space-4);
+    --space-lg: var(--space-6);
+    --space-xl: var(--space-16);
+
+    /* Border radius - inner_radius = outer_radius - padding */
+    --radius-none: 0px;
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --radius-full: 9999px;
+
+    /* Shadows - Minimal, using color instead of dark grey */
+    --shadow-none: none;
+    --shadow-sm: 0 2px 8px hsl(195, 60%, 90%);
+    --shadow-md: 0 4px 16px hsl(195, 60%, 88%);
+    --shadow-hover: 0 8px 24px hsl(195, 60%, 85%);
+
+    /* Transitions - Smooth easings */
+    --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bouncy: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    /* Layout */
+    --sidebar-width: 240px;
+    --topbar-height: 64px;
+    --content-max-width: 1280px;
+
+    /*
+     * Stacking order.
+     *
+     * This was implicit and wrong. Every overlay in the app sat at Tailwind's
+     * z-50 while the sidebar was 100 and the mobile floating nav 200, so the
+     * navigation always drew over an open dialog. It is most obvious on tablet,
+     * where the sidebar is still a full column rather than the floating bar, and
+     * a dialog opened there is half hidden behind the nav with its own footer
+     * underneath the nav's icons.
+     *
+     * Declared here so the order is one readable list instead of a z-50 literal
+     * repeated across six components, where adding one more overlay silently put
+     * it back underneath the sidebar.
+     */
+    --z-sidebar: 100;
+    --z-mobile-nav: 200;
+    /* Popovers sit above the nav but below a dialog opened on top of them. */
+    --z-popover: 250;
+    --z-dialog: 300;
+  }
+}
+

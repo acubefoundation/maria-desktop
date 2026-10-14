@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Maria Private Stock</string>
+    <string name="title_activity_main">Maria Private Stock</string>
+    <string name="package_name">com.mariaprivatestock.app</string>
+    <string name="custom_url_scheme">com.mariaprivatestock.app</string>
+</resources>

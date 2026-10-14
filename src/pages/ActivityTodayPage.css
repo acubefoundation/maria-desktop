@@ -1,0 +1,62 @@
+.activity-today-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-bottom: var(--space-12);
+}
+
+.activity-tabs {
+  display: flex;
+  gap: var(--space-2);
+  border-bottom: 1px solid var(--color-neutral);
+  margin-bottom: var(--space-4);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  flex-wrap: nowrap;
+}
+
+.activity-tab-btn {
+  padding: 12px 20px;
+  font-family: var(--font-sans);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-tertiary);
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-tab-btn:hover {
+  color: var(--color-text);
+  transform: translateY(-1px);
+}
+
+.activity-tab-btn:active {
+  transform: translateY(0);
+}
+
+.activity-tab-btn--active {
+  color: var(--color-accent);
+  border-bottom-color: var(--color-accent);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .activity-tabs {
+    margin-bottom: var(--space-4);
+    gap: 4px;
+  }
+
+  .activity-tab-btn {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+}

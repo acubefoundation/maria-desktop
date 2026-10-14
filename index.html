@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0d3d4d" />
+    <title>Maria Private Stock</title>
+    <style>
+      /*
+       * First-paint boot screen. The bundle still takes a moment to download and
+       * parse on a cold visit, and until React mounts the page was plain white.
+       * This is deliberately a trimmed copy of AppSplash.css so the hand-off to
+       * the real splash is invisible rather than a colour jump. main.jsx removes
+       * this node once React has painted.
+       */
+      html, body { margin: 0; background: #0d3d4d; }
+      #boot-splash {
+        position: fixed;
+        inset: 0;
+        z-index: 999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 22px;
+        background: linear-gradient(160deg, hsl(190, 80%, 48%) 0%, hsl(192, 72%, 30%) 52%, hsl(194, 66%, 18%) 100%);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        color: #f0fdff;
+      }
+      #boot-splash__bean {
+        width: 76px;
+        height: 76px;
+        animation: boot-stir 3.6s ease-in-out infinite;
+      }
+      #boot-splash__name {
+        font-size: clamp(20px, 5.4vw, 28px);
+        font-weight: 700;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+        text-align: center;
+      }
+      #boot-splash__tag {
+        margin-top: 8px;
+        font-size: clamp(10px, 2.9vw, 12px);
+        font-weight: 600;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: hsla(187, 90%, 92%, 0.82);
+      }
+      @keyframes boot-stir {
+        0% { transform: rotate(0deg); }
+        45% { transform: rotate(190deg); }
+        55% { transform: rotate(190deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot-splash__bean { animation: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="boot-splash" aria-hidden="true">
+      <svg id="boot-splash__bean" viewBox="0 0 48 48" fill="none">
+        <g transform="rotate(-32 24 24)">
+          <ellipse cx="24" cy="24" rx="12.5" ry="16.5" fill="currentColor" />
+          <path d="M19.4 36.2C17.6 30 18.4 25.2 24 24c5.6-1.2 6.4-6 4.6-12.2" stroke="#04222e" stroke-width="2.6" stroke-linecap="round" />
+        </g>
+      </svg>
+      <div style="display:flex;flex-direction:column;align-items:center">
+        <span id="boot-splash__name">Maria Private Stock</span>
+        <span id="boot-splash__tag">Stock Management</span>
+      </div>
+    </div>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

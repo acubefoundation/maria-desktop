@@ -1,0 +1,89 @@
+/* Settings Page */
+.settings-container {
+  display: flex;
+  gap: 32px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.settings-nav {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.settings-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--color-tertiary);
+  font-weight: 500;
+  font-size: 14px;
+  text-align: left;
+  width: 100%;
+  min-height: 44px;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.settings-nav-btn:hover {
+  background: var(--color-bg);
+  color: var(--color-text);
+}
+
+.settings-nav-btn--active {
+  background: var(--color-bg);
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.settings-content {
+  flex: 1;
+  max-width: 650px;
+  width: 100%;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .settings-container {
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 12px;
+  }
+
+  .settings-nav {
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    gap: 8px;
+  }
+
+  .settings-nav-btn {
+    width: auto;
+    flex-shrink: 0;
+    padding: 10px 14px;
+    font-size: 13px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-neutral);
+    border-radius: 20px;
+  }
+
+  .settings-nav-btn--active {
+    background: var(--color-accent);
+    color: #ffffff;
+    border-color: var(--color-accent);
+  }
+
+  .settings-content {
+    max-width: 100%;
+  }
+}

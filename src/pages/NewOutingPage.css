@@ -1,0 +1,1137 @@
+/* New Outing Page — Multi-Column Desktop Form & Real-Time Dispatch Calculator (Requirement 17) */
+.outing-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 48px;
+}
+
+.outing-header-bar {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.outing-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.outing-icon {
+  width: 48px;
+  height: 48px;
+  background: var(--color-accent);
+  color: #fafafa;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.outing-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.outing-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0;
+}
+
+.outing-header-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.outing-required-legend {
+  font-size: 12.5px;
+  color: var(--color-tertiary);
+}
+
+.outing-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.outing-card-section {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.outing-card-section__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border);
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.outing-card-section__title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.outing-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.outing-input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  color: var(--color-text);
+  transition: border-color var(--transition-fast);
+}
+
+.outing-input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  background: var(--color-surface);
+}
+
+/* Real-Time Dispatch Calculator Card */
+.outing-calc-card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.outing-calc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.outing-calc-title {
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text);
+}
+
+.outing-fill-max-btn {
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  border: 1px solid hsla(28, 75%, 45%, 0.3);
+  border-radius: var(--radius-xs);
+  padding: 5px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.outing-fill-max-btn:hover {
+  background: var(--color-accent);
+  color: #fafafa;
+}
+
+.outing-calc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  align-items: stretch;
+}
+
+.outing-calc-box {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+}
+
+.outing-calc-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-tertiary);
+}
+
+.outing-calc-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+  font-variant-numeric: tabular-nums;
+}
+
+.outing-calc-sub {
+  font-size: 11px;
+  color: var(--color-tertiary);
+}
+
+.outing-submit-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+@media (max-width: 960px) {
+  .outing-form-grid,
+  .outing-calc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .outing-form-grid,
+  .outing-calc-grid {
+    grid-template-columns: 1fr;
+  }
+  .outing-card-section {
+    padding: 16px;
+  }
+  .outing-summary-banner-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Company Selection & Multi-Entry Batch Dispatch (Robi Design System) */
+.outing-company-select-row {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+}
+
+.outing-input--company {
+  font-weight: 600;
+  font-size: 15px;
+  border-color: var(--color-border);
+}
+
+.outing-company-badge {
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  padding: 4px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid hsla(28, 75%, 45%, 0.3);
+}
+
+.outing-company-prompt {
+  background: var(--color-surface-subtle);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 36px 20px;
+  text-align: center;
+  color: var(--color-tertiary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.outing-company-prompt h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.outing-company-prompt p {
+  margin: 0;
+  font-size: 13px;
+  max-width: 440px;
+}
+
+.outing-company-stock-area {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.outing-stock-actions-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.outing-stock-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 240px;
+}
+
+.outing-stock-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-tertiary);
+  pointer-events: none;
+}
+
+.outing-stock-search-input {
+  width: 100%;
+  height: 38px;
+  padding: 0 12px 0 36px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 13px;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.outing-stock-search-input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px hsla(28, 75%, 45%, 0.15);
+}
+
+.outing-stock-btn-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.outing-batch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-xs);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.outing-batch-btn--select-all {
+  background: var(--color-accent-bg);
+  color: var(--color-accent);
+  border: 1px solid hsla(28, 75%, 45%, 0.35);
+}
+
+.outing-batch-btn--select-all:hover:not(:disabled) {
+  background: var(--color-accent);
+  color: #fafafa;
+}
+
+.outing-batch-btn--select-all:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.outing-batch-btn--clear {
+  background: transparent;
+  color: var(--color-tertiary);
+  border: 1px solid var(--color-border);
+}
+
+.outing-batch-btn--clear:hover {
+  background: var(--color-surface-subtle);
+  color: var(--color-text);
+}
+
+/* Reused by the batch card list for its empty state. */
+.outing-multi-empty {
+  padding: 32px 16px;
+  color: var(--color-tertiary);
+  font-style: italic;
+}
+
+.outing-batch-no {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-accent);
+}
+
+.outing-batch-sub {
+  font-size: 11.5px;
+  color: var(--color-tertiary);
+}
+
+
+/* Prominent Summary Banner */
+.outing-summary-banner {
+  background: hsl(225, 15%, 15%);
+  color: #fafafa;
+  border-radius: var(--radius-sm);
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.outing-summary-banner-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.3fr;
+  gap: 16px;
+  align-items: center;
+}
+
+.outing-summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.outing-summary-item--highlight {
+  background: hsla(28, 75%, 45%, 0.18);
+  border: 1px solid hsla(28, 75%, 45%, 0.45);
+  border-radius: var(--radius-xs);
+  padding: 8px 14px;
+}
+
+.outing-summary-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.outing-summary-item--highlight .outing-summary-label {
+  color: var(--color-accent);
+}
+
+.outing-summary-val {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: #fafafa;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.outing-summary-val--hero {
+  font-size: 22px;
+  color: #fafafa;
+}
+
+.outing-summary-unit {
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.outing-banner-status {
+  padding: 8px 12px;
+  border-radius: var(--radius-xs);
+  font-size: 12.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.outing-banner-status--info {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.outing-banner-status--err {
+  background: hsla(0, 75%, 50%, 0.18);
+  border: 1px solid hsla(0, 75%, 50%, 0.4);
+  color: #ff9999;
+}
+
+.outing-banner-status--warn {
+  background: hsla(38, 90%, 50%, 0.16);
+  border: 1px solid hsla(38, 90%, 50%, 0.38);
+  color: #ffd28a;
+}
+
+.outing-banner-status--ok {
+  background: hsla(145, 60%, 40%, 0.18);
+  border: 1px solid hsla(145, 60%, 40%, 0.4);
+  color: #99ffb8;
+}
+
+.grid-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.grid-field label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.req-star {
+  color: var(--color-error);
+  font-weight: 700;
+}
+
+.outing-add-link,
+.inbound-add-link {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--color-accent);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.outing-add-link:hover,
+.inbound-add-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------------------------------------------------------------------------
+   Per-batch dispatch cards
+   ---------------------------------------------------------------------------
+   A card per batch rather than a table row: each batch now carries a nested
+   editor (one row per coffee type), and that does not survive a table on a
+   phone. The chips are the primary control — they say what is available and
+   add/remove the matching line — so the editor below stays short. */
+
+.outing-batch-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.outing-batch-card {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  padding: 14px 16px;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.outing-batch-card--on {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 1px var(--color-accent-bg);
+}
+
+.outing-batch-card--err {
+  border-color: var(--color-error);
+}
+
+.outing-batch-card__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.outing-batch-card__pick {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  min-width: 0;
+}
+
+.outing-batch-card__pick input {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.outing-batch-card__pick span {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.outing-batch-card__avail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.2;
+  flex-shrink: 0;
+}
+
+.outing-batch-card__avail-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-muted);
+}
+
+.outing-batch-card__avail strong {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--color-primary);
+}
+
+/* Type chips */
+.outing-type-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.outing-type-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 7px 11px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface-subtle);
+  color: var(--color-text);
+  font-size: 12px;
+  cursor: pointer;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+  text-align: left;
+}
+
+.outing-type-chip:hover:not(:disabled) {
+  border-color: var(--color-accent);
+}
+
+.outing-type-chip__label {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.outing-type-chip__kg {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.outing-type-chip--clean.outing-type-chip--on {
+  background: var(--color-clean-bg);
+  border-color: var(--color-clean);
+}
+.outing-type-chip--clean.outing-type-chip--on .outing-type-chip__kg {
+  color: var(--color-clean);
+}
+
+.outing-type-chip--unprocessed_reject.outing-type-chip--on {
+  background: var(--color-reject-bg);
+  border-color: var(--color-reject);
+}
+.outing-type-chip--unprocessed_reject.outing-type-chip--on .outing-type-chip__kg {
+  color: var(--color-reject);
+}
+
+.outing-type-chip--waste.outing-type-chip--on {
+  background: var(--color-waste-bg);
+  border-color: var(--color-waste);
+}
+.outing-type-chip--waste.outing-type-chip--on .outing-type-chip__kg {
+  color: var(--color-waste);
+}
+
+.outing-type-chip--unprocessed.outing-type-chip--on {
+  background: var(--color-accent-bg);
+  border-color: var(--color-accent);
+}
+.outing-type-chip--unprocessed.outing-type-chip--on .outing-type-chip__kg {
+  color: var(--color-accent);
+}
+
+.outing-type-chip--empty {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Line editors */
+.outing-lines {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.outing-lines__empty {
+  margin: 0;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.outing-line {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  background: var(--color-surface-subtle);
+}
+
+.outing-line__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.outing-line__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.outing-line__dot--clean { background: var(--color-clean); }
+.outing-line__dot--unprocessed_reject { background: var(--color-reject); }
+.outing-line__dot--waste { background: var(--color-waste); }
+.outing-line__dot--unprocessed { background: var(--color-accent); }
+
+.outing-line__label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.outing-line__max {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--color-muted);
+}
+
+.outing-line__inputs {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 9px;
+  flex-wrap: wrap;
+}
+
+.outing-line__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1 1 150px;
+  min-width: 0;
+}
+
+.outing-line__field--narrow {
+  flex: 0 1 96px;
+}
+
+.outing-line__field span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+}
+
+.outing-line__field input {
+  height: 34px;
+  padding: 0 9px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  width: 100%;
+}
+
+.outing-line__field input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 2px var(--color-accent-bg);
+}
+
+.outing-line__field input.outing-line__input--err {
+  border-color: var(--color-error);
+  background: var(--color-error-bg);
+}
+
+/* KG per bag. Editable for every type; where the batch has no recorded bag
+   count the field is dashed to say its value came from the user rather than
+   the record. */
+.outing-line__input--manual {
+  border-style: dashed !important;
+}
+
+.outing-line__manual {
+  font-style: normal;
+  font-size: 9px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--color-accent);
+  margin-left: 5px;
+}
+
+/* Mismatch between bags and weight: reported, never blocking. */
+.outing-line__warn {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin: 8px 0 0;
+  padding: 6px 9px;
+  border-radius: var(--radius-xs);
+  background: var(--color-waste-bg);
+  color: var(--color-waste);
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.outing-line__warn svg {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.outing-line__warn strong {
+  font-family: var(--font-mono);
+}
+
+.outing-line__actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.outing-line__actions button {
+  height: 34px;
+  padding: 0 11px;
+  border-radius: var(--radius-xs);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.outing-line__actions button:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.outing-lines__total {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding-top: 4px;
+  font-size: 12px;
+  color: var(--color-muted);
+}
+
+.outing-lines__total strong {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--color-primary);
+}
+
+.outing-lines__bags {
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/* Below 640px the weight and bag inputs stack full width; a 96px bag field
+   beside a 150px weight field leaves neither enough room to read. */
+@media (max-width: 640px) {
+  .outing-batch-card {
+    padding: 12px;
+  }
+
+  .outing-type-chip {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: space-between;
+  }
+
+  .outing-line__inputs {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .outing-line__field,
+  .outing-line__field--narrow {
+    flex: 1 1 auto;
+  }
+
+  .outing-line__actions button {
+    flex: 1 1 auto;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Dispatch review dialog
+   ---------------------------------------------------------------------------
+   The point of this panel is that nothing is surprising on the confirm step, so
+   it restates the totals, the release details and every line rather than
+   summarising. */
+
+.outing-review {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.outing-review__totals {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.outing-review__totals > div {
+  background: var(--color-surface-subtle);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.outing-review__totals span {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+}
+
+.outing-review__totals strong {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--color-primary);
+  overflow-wrap: anywhere;
+}
+
+.outing-review__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 18px;
+  margin: 0;
+  padding: 14px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.outing-review__meta > div {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  min-width: 0;
+}
+
+.outing-review__meta dt {
+  font-size: 11.5px;
+  color: var(--color-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 96px;
+}
+
+.outing-review__meta dd {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  overflow-wrap: anywhere;
+}
+
+.outing-review__batches {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.outing-review__batch {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.outing-review__batch-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--color-surface-subtle);
+  border-bottom: 1px solid var(--color-border);
+  flex-wrap: wrap;
+}
+
+.outing-review__batch-head strong {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--color-accent);
+}
+
+.outing-review__batch-head span {
+  font-size: 11.5px;
+  color: var(--color-tertiary);
+}
+
+.outing-review__batch-total {
+  margin-left: auto;
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--color-primary) !important;
+}
+
+.outing-review__lines {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12.5px;
+}
+
+.outing-review__lines th {
+  padding: 6px 12px;
+  text-align: left;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-muted);
+  font-weight: 600;
+}
+
+.outing-review__lines td {
+  padding: 7px 12px;
+  border-top: 1px solid var(--color-border);
+}
+
+.outing-review__dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  margin-right: 7px;
+}
+.outing-review__dot--clean { background: var(--color-clean); }
+.outing-review__dot--unprocessed_reject { background: var(--color-reject); }
+.outing-review__dot--waste { background: var(--color-waste); }
+.outing-review__dot--unprocessed { background: var(--color-accent); }
+
+.outing-review__note {
+  margin: 0;
+  font-size: 11.5px;
+  color: var(--color-muted);
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .outing-review__totals {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .outing-review__meta {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .outing-review__meta dt {
+    min-width: 88px;
+  }
+
+  .outing-review__batch-total {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+}
+
+/* A batch that has run out is still listed, so it can be found and the reason
+   read, but it is not something a dispatch can draw on. Dimmed rather than
+   hidden, because its absence used to read as "not yours". */
+.outing-batch-card--empty {
+  opacity: 0.62;
+}
+
+.outing-batch-card--empty .outing-batch-card__pick {
+  cursor: not-allowed;
+}
+
+.outing-batch-card--empty .outing-batch-card__pick input[type='checkbox'] {
+  cursor: not-allowed;
+}
+
+.outing-batch-card__empty-note {
+  display: block;
+  font-size: 11px;
+  font-style: normal;
+  color: var(--color-tertiary);
+  margin-top: 2px;
+}
+
+/* ---- only-available toggle ---- */
+.outing-stock-only-available {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--color-text);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+}
+
+.outing-stock-only-available input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-clean);
+  cursor: pointer;
+}
+
+/* Says what is being withheld, so the list is never quietly short. */
+.outing-stock-only-available__count {
+  display: block;
+  font-style: normal;
+  font-size: 11px;
+  color: var(--color-tertiary);
+}
+
+@media (max-width: 640px) {
+  .outing-stock-only-available {
+    font-size: 12px;
+    white-space: normal;
+  }
+}

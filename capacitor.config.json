@@ -1,0 +1,21 @@
+{
+  "appName": "Maria Private Stock",
+  "packageName": "com.mariaprivatestock.app",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchShowAfter": 1000,
+      "androidSplashResourceAnimation": "launch"
+    }
+  },
+  "android": {
+    "buildOptions": {
+      "keystorePath": null
+    }
+  },
+  "appId": "com.mariaprivatestock.app"
+}

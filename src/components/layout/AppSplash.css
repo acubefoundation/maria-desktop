@@ -1,0 +1,247 @@
+/*
+ * Branded launch animation shown while the auth session is restored.
+ * Cyan-blue to match Maria Private Stock branding (--color-accent:
+ * hsl(190, 80%, 48%)), which is deliberately not the public app's teal.
+ */
+
+.app-splash {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding: 24px;
+  overflow: hidden;
+  background: linear-gradient(160deg, hsl(190, 80%, 48%) 0%, hsl(192, 72%, 30%) 52%, hsl(194, 66%, 18%) 100%);
+  color: #f0fdff;
+  font-family: inherit;
+}
+
+/* Soft light bloom behind the mark. */
+.app-splash__glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 520px;
+  height: 520px;
+  max-width: 130vmax;
+  max-height: 130vmax;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, hsla(187, 90%, 72%, 0.34) 0%, hsla(187, 90%, 72%, 0) 62%);
+  animation: splash-breathe 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* Light band that sweeps across the screen once on entry. */
+.app-splash__sheen {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 38%, hsla(0, 0%, 100%, 0.16) 50%, transparent 62%);
+  transform: translateX(-100%);
+  animation: splash-sweep 1.5s cubic-bezier(0.4, 0, 0.2, 1) 0.15s both;
+  pointer-events: none;
+}
+
+.app-splash__inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+}
+
+/* --- Animated coffee bean ------------------------------------------------ */
+
+.app-splash__stage {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 132px;
+  height: 132px;
+  animation: splash-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.app-splash__float {
+  display: flex;
+  animation: splash-float 2.8s ease-in-out infinite;
+}
+
+.app-splash__stir {
+  display: flex;
+  animation: splash-stir 3.6s ease-in-out infinite;
+}
+
+.app-splash__bean {
+  width: 76px;
+  height: 76px;
+  color: #f0fdff;
+  filter: drop-shadow(0 10px 22px hsla(194, 70%, 10%, 0.45));
+}
+
+/* Expanding rings read as a brewing pulse radiating from the bean. */
+.app-splash__ripple {
+  position: absolute;
+  width: 108px;
+  height: 108px;
+  border: 2px solid hsla(187, 90%, 85%, 0.55);
+  border-radius: 50%;
+  opacity: 0;
+  animation: splash-ripple 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  pointer-events: none;
+}
+
+.app-splash__ripple--b {
+  animation-delay: 1.2s;
+}
+
+/* --- Wordmark ------------------------------------------------------------ */
+
+.app-splash__wordmark {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  animation: splash-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+}
+
+.app-splash__name {
+  font-size: clamp(20px, 5.4vw, 28px);
+  font-weight: 700;
+  letter-spacing: 0.055em;
+  text-transform: uppercase;
+  line-height: 1.2;
+  text-align: center;
+  text-shadow: 0 2px 14px hsla(194, 70%, 10%, 0.45);
+}
+
+.app-splash__rule {
+  width: 46px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, transparent, hsla(187, 90%, 85%, 0.95), transparent);
+  animation: splash-rule 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.4s both;
+}
+
+.app-splash__tag {
+  font-size: clamp(10px, 2.9vw, 12px);
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: hsla(187, 90%, 92%, 0.82);
+}
+
+/* --- Indeterminate progress ---------------------------------------------- */
+
+.app-splash__progress {
+  position: relative;
+  width: min(190px, 62vw);
+  height: 3px;
+  overflow: hidden;
+  border-radius: 100px;
+  background: hsla(187, 90%, 92%, 0.2);
+  animation: splash-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+}
+
+.app-splash__progress-bar {
+  position: absolute;
+  inset: 0;
+  width: 45%;
+  border-radius: 100px;
+  background: linear-gradient(90deg, hsla(187, 90%, 72%, 0.5), hsla(187, 95%, 92%, 1));
+  animation: splash-indeterminate 1.25s ease-in-out infinite;
+}
+
+.app-splash__message {
+  position: absolute;
+  bottom: max(28px, env(safe-area-inset-bottom));
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: hsla(187, 90%, 92%, 0.62);
+  animation: splash-fade 0.8s ease 0.55s both;
+}
+
+/* --- Keyframes ----------------------------------------------------------- */
+
+@keyframes splash-rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes splash-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes splash-breathe {
+  0%, 100% { opacity: 0.75; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.12); }
+}
+
+@keyframes splash-sweep {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
+}
+
+@keyframes splash-float {
+  0%, 100% { transform: translateY(-5px); }
+  50% { transform: translateY(5px); }
+}
+
+@keyframes splash-stir {
+  0% { transform: rotate(0deg); }
+  45% { transform: rotate(190deg); }
+  55% { transform: rotate(190deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes splash-ripple {
+  0% { opacity: 0.5; transform: scale(0.62); }
+  100% { opacity: 0; transform: scale(1.55); }
+}
+
+@keyframes splash-rule {
+  from { opacity: 0; transform: scaleX(0.2); }
+  to { opacity: 1; transform: scaleX(1); }
+}
+
+@keyframes splash-indeterminate {
+  0% { transform: translateX(-105%); }
+  100% { transform: translateX(325%); }
+}
+
+/* --- Motion preferences -------------------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .app-splash__glow,
+  .app-splash__sheen,
+  .app-splash__float,
+  .app-splash__stir,
+  .app-splash__ripple,
+  .app-splash__rule,
+  .app-splash__progress-bar {
+    animation: none;
+  }
+
+  .app-splash__sheen { display: none; }
+
+  .app-splash__stage,
+  .app-splash__wordmark,
+  .app-splash__progress,
+  .app-splash__message {
+    animation: splash-fade 0.2s ease both;
+  }
+
+  /* Keep a visible signal that the app is busy without the movement. */
+  .app-splash__progress-bar {
+    width: 100%;
+    transform: none;
+    opacity: 0.55;
+  }
+}
