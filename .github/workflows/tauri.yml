@@ -40,7 +40,7 @@ jobs:
       - name: Install system dependencies (macOS)
         if: matrix.os == 'macos-latest'
         run: |
-          brew install webkit2gtk-4.1
+          brew install webkitgtk
 
       - name: Install npm dependencies
         run: npm ci
